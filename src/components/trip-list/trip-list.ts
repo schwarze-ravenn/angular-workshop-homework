@@ -26,4 +26,9 @@ export class TripList implements OnInit {
     onShowDate() {
         console.log('event was fired from child');
     }
+
+    onRemoveTrip(id: Trip['id']): void {
+        this.tripService.removeTrip(id);
+        this.trips = this.tripService.getTrips();
+    }
 }

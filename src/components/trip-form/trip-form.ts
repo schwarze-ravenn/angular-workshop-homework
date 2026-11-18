@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import { Trip } from '../../services/trip-service';
+import { Router } from '@angular/router';
+import { Trip, TripService } from '../../services/trip-service';
 
 @Component({
     selector: 'app-trip-form',
@@ -9,6 +10,9 @@ import { Trip } from '../../services/trip-service';
     imports: [FormField],
 })
 export class TripForm {
+    private tripService = inject(TripService);
+    private router = inject(Router);
+
     tripModel = signal<Omit<Trip, 'id'>>({
         name: '',
         description: '',
@@ -24,7 +28,8 @@ export class TripForm {
             console.log('invalid form', this.tripForm().errors())
             return;
         }
-        console.log('form is submitted', this.tripModel());
+        this.tripService.addTrip(this.tripModel());
+        void this.router.navigate(['/']);
     }
 
     tripStart() {

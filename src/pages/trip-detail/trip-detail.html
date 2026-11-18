@@ -1,6 +1,14 @@
 <h1>Trip Detail</h1>
 <p>Trip ID: {{ tripId }}</p>
 
+@if(trip(); as selectedTrip) {
+    <p>Name: {{ selectedTrip.name }}</p>
+    <p>Description: {{ selectedTrip.description }}</p>
+    <p>Date: {{ selectedTrip.date }}</p>
+} @else {
+    <p>Trip not found.</p>
+}
+
 @if(gps()) {
     <p>GPS: {{ gps()?.longitude}}, {{ gps()?.latitude }}</p>
 }

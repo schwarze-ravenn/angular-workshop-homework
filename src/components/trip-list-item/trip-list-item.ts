@@ -12,6 +12,7 @@ import { Trip } from '../../services/trip-service';
 export class TripListItem {
     trip = input.required<Trip>();
     onShowDate = output();
+    onRemove = output<number>();
     isTripInPast: Signal<boolean> = computed(() => this.trip().date < new Date().toISOString())
 
     getTripLink(): string {
@@ -21,5 +22,9 @@ export class TripListItem {
     showDate(trip: Trip): void {
         alert(trip.date);
         this.onShowDate.emit();
+    }
+
+    removeTrip(): void {
+        this.onRemove.emit(this.trip().id);
     }
 }

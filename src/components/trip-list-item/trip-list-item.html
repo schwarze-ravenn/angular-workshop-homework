@@ -3,4 +3,5 @@
     | {{ trip().description }}
     | {{ trip().date | date }}
     <button (click)="showDate(trip())">Tell me the date</button>
+    <button type="button" (click)="removeTrip()">Delete</button>
 </li>
